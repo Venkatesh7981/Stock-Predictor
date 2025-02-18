@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import yfinance as yf
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import streamlit as st
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
@@ -10,6 +10,7 @@ def predict(text):
     return "Prediction: " + text  
 iface = gr.Interface(fn=predict, inputs="text", outputs="text")  
 iface.launch()  
+  # Use the trained model to make predictions
 
 
 st.markdown(
@@ -92,6 +93,9 @@ scale_factor = 1 / scaler.scale_[0]
 predictions = predictions * scale_factor
 y = y * scale_factor
 
+
+model = load_model("Stock Predictions Model.h5")
+predictions = model.predict(x)
 
 st.markdown('<h2 class="subheader">📊 Predicted vs Actual Prices</h2>', unsafe_allow_html=True)
 fig, ax = plt.subplots(figsize=(10, 5))
