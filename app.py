@@ -5,6 +5,12 @@ from keras.models import load_model
 import streamlit as st
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
+import gradio as gr
+def predict(text):
+    return "Prediction: " + text  
+iface = gr.Interface(fn=predict, inputs="text", outputs="text")  
+iface.launch()  
+
 
 st.markdown(
     """
